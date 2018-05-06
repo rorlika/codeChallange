@@ -5,10 +5,16 @@ class ScrapyService
 
   def initialize(url)
     @doc = Nokogiri::HTML(open(fix_url(url)))
+  rescue ArgumentError => e
+    raise 'Cannt scrap this url'
   end
 
   def extract_content
-    group_source_by_tag.each { |_, v| v.map! { |c| c.content.squish }.delete_if(&:blank?) }
+    group_source_by_tag.each do |_, v|
+      v.map! do |c|
+        c.content.encode!('UTF-8', 'UTF-8', invalid: :replace).squish
+      end
+    end
   end
 
   private

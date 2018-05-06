@@ -1,5 +1,5 @@
 class Page < ApplicationRecord
-  has_one :source
-  # validates :url, presence: true
-  # validates :url, uniqueness: true
+  has_one :source, dependent: :destroy
+  validates :url, presence: true
+  validates :url, uniqueness: true
 end

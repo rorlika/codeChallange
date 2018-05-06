@@ -30,10 +30,13 @@ group :development, :test do
 
   # Use RSpec for specs
   gem 'rspec-rails', '~> 3.7'
+end
 
-  # Use Factory Girl for generating random test data
+group :test do
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
-
+  gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development do

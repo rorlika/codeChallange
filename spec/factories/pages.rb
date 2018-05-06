@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :page do
-    url "MyString"
+    url 'https://publer.me/login'
   end
 end

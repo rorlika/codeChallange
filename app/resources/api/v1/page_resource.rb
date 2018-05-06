@@ -1,8 +1,7 @@
 module Api
   module V1
     class PageResource < JSONAPI::Resource
-      attributes :url
-      has_one :source
+      attributes :url, :sources
       paginator :offset
 
       after_create :store_content
@@ -15,10 +14,9 @@ module Api
         @content ||= ScrapyService.new(@model.url).extract_content
       end
 
-      # method to get sources for respective page
-      # def sources
-      #   @model.source.as_json.except('id', 'page_id', 'updated_at', 'created_at')
-      # end
+      def sources
+        @model.source.as_json.except('id', 'page_id', 'updated_at', 'created_at')
+      end
     end
   end
 end
